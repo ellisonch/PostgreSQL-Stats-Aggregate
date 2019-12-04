@@ -80,9 +80,9 @@ BEGIN
 		$1.min,
 		$1.max,
 		$1.m1,
-		$1.m2 / ($1.n - 1.0), 
-		case when $1.m2 = 0 then null else sqrt($1.n) * $1.m3 / ($1.m2 ^ 1.5) end, 
-		case when $1.m2 = 0 then null else $1.n * $1.m4 / ($1.m2 * $1.m2) - 3.0 end
+		$1.m2 / nullif(($1.n - 1.0), 0), 
+		case when $1.m2 = 0 then null else sqrt($1.n) * $1.m3 / nullif(($1.m2 ^ 1.5), 0) end, 
+		case when $1.m2 = 0 then null else $1.n * $1.m4 / nullif(($1.m2 * $1.m2) - 3.0, 0) end
 	);
 END;
 '
