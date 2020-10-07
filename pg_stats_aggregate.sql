@@ -55,18 +55,21 @@ DECLARE
 	delta_n2 double precision;
 	term1 double precision;
 BEGIN
-	n1 = a.n;
-	a.n = a.n + 1;
-	delta = x - a.m1;
-	delta_n = delta / a.n;
-	delta_n2 = delta_n * delta_n;
-	term1 = delta * delta_n * n1;
-	a.m1 = a.m1 + delta_n;
-	a.m4 = a.m4 + term1 * delta_n2 * (a.n*a.n - 3*a.n + 3) + 6 * delta_n2 * a.m2 - 4 * delta_n * a.m3;
-	a.m3 = a.m3 + term1 * delta_n * (a.n - 2) - 3 * delta_n * a.m2;
-	a.m2 = a.m2 + term1;
-	a.min = least(a.min, x);
-	a.max = greatest(a.max, x);
+	if x IS NOT NULL then
+		n1 = a.n;
+		a.n = a.n + 1;
+		delta = x - a.m1;
+		delta_n = delta / a.n;
+		delta_n2 = delta_n * delta_n;
+		term1 = delta * delta_n * n1;
+		a.m1 = a.m1 + delta_n;
+		a.m4 = a.m4 + term1 * delta_n2 * (a.n*a.n - 3*a.n + 3) + 6 * delta_n2 * a.m2 - 4 * delta_n * a.m3;
+		a.m3 = a.m3 + term1 * delta_n * (a.n - 2) - 3 * delta_n * a.m2;
+		a.m2 = a.m2 + term1;
+		a.min = least(a.min, x);
+		a.max = greatest(a.max, x);
+	endif;
+	
 	RETURN a;
 END;
 '
