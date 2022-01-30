@@ -68,7 +68,7 @@ BEGIN
 		a.m2 = a.m2 + term1;
 		a.min = least(a.min, x);
 		a.max = greatest(a.max, x);
-	endif;
+	end if;
 	
 	RETURN a;
 END;
