@@ -84,8 +84,8 @@ BEGIN
 		$1.max,
 		case when $1.n = 0 then null else $1.m1 end,
 		case when $1.n = 0 then null else $1.m2 / nullif(($1.n - 1.0), 0) end,
-		case when $1.m2 = 0 then null else sqrt($1.n) * $1.m3 / nullif(($1.m2 ^ 1.5), 0) end, 
-		case when $1.m2 = 0 then null else $1.n * $1.m4 / nullif(($1.m2 * $1.m2) - 3.0, 0) end
+		case when $1.m2 = 0 then null else sqrt($1.n) * $1.m3 / nullif(($1.m2 ^ 1.5), 0) end,
+		case when $1.m2 = 0 then null else $1.n * $1.m4 / nullif($1.m2 * $1.m2, 0) - 3.0 end
 	);
 END;
 '
